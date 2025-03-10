@@ -11,7 +11,8 @@ class MatakuliahController extends Controller
      */
     public function index()
     {
-        return view('matakuliah.index');
+        $matakuliah['matakuliah'] = \App\Models\Matakuliah::latest()->paginate(10);
+        return view('matakuliah.index', $matakuliah);
     }
 
     /**
