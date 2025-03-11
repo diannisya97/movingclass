@@ -13,6 +13,7 @@
             <th>Nama Mata Kuliah</th>
             <th>SKS Teori</th>
             <th>SKS Praktikum</th>
+            <th>Foto</th>
             <th>Aksi</th>
         </tr>
 
@@ -25,6 +26,11 @@
             <td>{{ $item->nama_matkul }}</td>
             <td>{{ $item->sks_teori }}</td>
             <td>{{ $item->sks_praktikum }}</td>
+            <td>
+                @if ($item->foto)
+                    <img src="{{ Storage::url($item->foto) }}" alt="" style="width:"50>
+                @endif
+            </td>
             <td>
                 <a href="{{ route('matakuliah.edit', $item->id) }}" class="btn btn-warning">Edit</a>
                 <a href="{{ route('matakuliah.destroy', $item->id) }}" class="btn btn-danger">Hapus</a>

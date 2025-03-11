@@ -4,7 +4,7 @@
     <div class="card">
         <div class="card-body" >
             <h1>Tambah Mata Kuliah</h1>
-            <form action="/matakuliah" method="post">
+            <form action="/matakuliah" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="kode_matkul">Kode Matakuliah</label>
@@ -25,6 +25,11 @@
                     <label for = sks_praktikum>SKS Praktikum</label>
                     <input type="number" class="form-control" id="sks_praktikum" name="sks_praktikum" value="{{ old('sks_praktikum') }}">
                     <span class="text-danger"> {{ $errors->first('sks_praktikum') }} </span>
+                </div>
+                <div class="form-group">
+                    <label for="foto">Foto</label>
+                    <input type="file" class="form-control" id="foto" name="foto" >
+                    <span class="text-danger"> {{ $errors->first('foto') }} </span>
                 </div>
                 <br>
                 <button type="submit" class="btn btn-primary">Simpan</button>

@@ -33,10 +33,12 @@ class MatakuliahController extends Controller
             'nama_matkul' => 'required|',
             'sks_teori' => 'required|integer|min:0',
             'sks_praktikum' => 'required|integer|min:0',
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5000',
         ]);
 
         $matakuliah = new \App\Models\Matakuliah;
         $matakuliah->fill($requestdata);
+        $matakuliah->foto = $request->file('foto')->store('public');
         $matakuliah->save();
         flash('Data berhasil ditambahkan')->success();
         return back();
