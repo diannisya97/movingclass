@@ -33,5 +33,6 @@
     @endforeach
     </tbody>
 </table>
+{{ $matakuliah->links() }}
 
 @endsection

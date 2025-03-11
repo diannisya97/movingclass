@@ -28,7 +28,18 @@ class MatakuliahController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $requestdata = $request->validate([
+            'kode_matkul' => 'required|min:3',
+            'nama_matkul' => 'required|',
+            'sks_teori' => 'required|integer|min:0',
+            'sks_praktikum' => 'required|integer|min:0',
+        ]);
+
+        $matakuliah = new \App\Models\Matakuliah;
+        $matakuliah->fill($requestdata);
+        $matakuliah->save();
+        flash('Data berhasil ditambahkan')->success();
+        return back();
     }
 
     /**
