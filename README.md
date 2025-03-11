@@ -64,3 +64,83 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+# Moving Class Project
+
+## Persyaratan Sistem
+- PHP >= 8.0
+- Composer
+- MySQL/MariaDB
+- Node.js & NPM (untuk asset compilation)
+
+## Langkah Instalasi
+
+1. Clone repository ini
+```bash
+git clone https://github.com/diannisya97/movingclass.git
+```
+
+2. Install dependencies PHP menggunakan Composer
+```bash
+composer install
+```
+
+3. Salin file .env.example menjadi .env
+```bash
+cp .env.example .env
+```
+
+4. Generate application key
+```bash
+php artisan key:generate
+```
+
+5. Sesuaikan konfigurasi database di file .env
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=nama_database
+DB_USERNAME=username_database
+DB_PASSWORD=password_database
+```
+
+6. Jalankan migrasi database
+```bash
+php artisan migrate
+```
+
+7. Install dependencies Node.js dan compile assets
+```bash
+npm install
+npm run dev
+```
+
+8. Jalankan server development
+```bash
+php artisan serve
+```
+
+Aplikasi akan berjalan di `http://localhost:8000`
+
+## Troubleshooting
+
+Jika mengalami masalah, coba langkah berikut:
+
+1. Hapus cache
+```bash
+php artisan config:clear
+php artisan cache:clear
+```
+
+2. Regenerate autoload files
+```bash
+composer dump-autoload
+```
+
+3. Pastikan folder storage dan bootstrap/cache memiliki permission yang benar
+```bash
+chmod -R 775 storage bootstrap/cache
+```
+
