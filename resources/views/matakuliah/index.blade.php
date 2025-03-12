@@ -1,4 +1,4 @@
-@extends('mylayout', ['title' => 'Data Mata Kuliah'])
+@extends('layouts.app', ['title' => 'Data Mata Kuliah'])
 
 @section('content')
 <h5> Nama Mata Kuliah</h5>
@@ -32,8 +32,13 @@
                 @endif
             </td>
             <td>
-                <a href="{{ route('matakuliah.edit', $item->id) }}" class="btn btn-warning">Edit</a>
-                <a href="{{ route('matakuliah.destroy', $item->id) }}" class="btn btn-danger">Hapus</a>
+                <a href="/matakuliah/{{ $item->id }}/edit" class="btn btn-warning btn-sm">Edit</a>
+               <form action="/matakuliah/{{ $item->id }}" method="post" class="d-inline">
+                @csrf
+                @method('DELETE')
+
+                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Hapus</button>
+               </form>
             </td>
         </tr>
     @endforeach

@@ -8,4 +8,5 @@ class Matakuliah extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
 }

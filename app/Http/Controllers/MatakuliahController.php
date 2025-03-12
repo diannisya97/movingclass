@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MatakuliahController extends Controller
 {
@@ -40,8 +41,8 @@ class MatakuliahController extends Controller
         $matakuliah->fill($requestdata);
         $matakuliah->foto = $request->file('foto')->store('public');
         $matakuliah->save();
-        flash('Data berhasil ditambahkan')->success();
-        return back();
+        flash('Data berhasil diubah')->success();
+        return redirect('/matakuliah');
     }
 
     /**
@@ -57,7 +58,8 @@ class MatakuliahController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $matakuliah = \App\Models\Matakuliah::findOrFail($id);
+        return view('matakuliah.edit', ['matakuliah' => $matakuliah]);
     }
 
     /**
@@ -65,7 +67,23 @@ class MatakuliahController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $requestdata = $request->validate([
+            'kode_matkul' => 'required|unique:matakuliahs,kode_matkul,'.$id,
+            'nama_matkul' => 'required|',
+            'sks_teori' => 'required|integer|min:0',
+            'sks_praktikum' => 'required|integer|min:0',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5000',
+        ]);
+
+        $matakuliah = \App\Models\Matakuliah::findOrFail($id);
+        $matakuliah->fill($requestdata);
+        if ($request->hasFile('foto')) {
+            Storage::delete($matakuliah->foto);
+            $matakuliah->foto = $request->file('foto')->store('public');
+        }
+        $matakuliah->save();
+        flash('Data berhasil ditambahkan')->success();
+        return redirect('/matakuliah');
     }
 
     /**
@@ -73,6 +91,9 @@ class MatakuliahController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $matakuliah = \App\Models\Matakuliah::findOrFail($id);
+        $matakuliah->delete();
+        flash('Data berhasil dihapus')->success();
+        return redirect('/matakuliah');
     }
 }
