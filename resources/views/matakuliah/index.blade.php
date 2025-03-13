@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => 'Data Mata Kuliah'])
+@extends('layouts.app')
 
 @section('content')
 <h5> Nama Mata Kuliah</h5>

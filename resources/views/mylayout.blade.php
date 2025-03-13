@@ -27,7 +27,6 @@
         <nav
             class="navbar navbar-expand-lg navbar-light bg-white mb-4 shadow-md"
         >
-            <div class="container">
                 <a class="navbar-brand" href="#">{{ env('APP_NAME') }}</a>
                 <button
                     class="navbar-toggler"
